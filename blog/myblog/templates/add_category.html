@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Add Category{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p><h1>Add Category here</h1></p>
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" href="{% url 'add_post' %}">Add</button>
+        </form>
+    </div>
+    {% else %}
+    Please Login to continue... <br/>
+    <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</body>
+</html>   
+{% endblock %}

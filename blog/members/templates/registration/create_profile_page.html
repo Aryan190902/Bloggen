@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Create A Profile Page{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile Page</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p><h1>Create Profile Page</h1></p>
+    <div class="mb-3">
+        <form method="POST", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Create</button>
+        </form>
+        <br/>
+    </div>
+    {% else %}
+    Please Login to continue... <br/>
+    <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</body>
+</html>   
+{% endblock %}

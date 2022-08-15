@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+
+    <p><h1>Latest Blogs</h1></p>
+    <ul>
+    {% for post in object_list %}
+        <a href="{% url 'articleDetail' post.pk %}">{{ post.title }}</a> - 
+            <a href="{% url 'cats' post.category %}">{{ post.category }}</a>
+             - {{ post.author }}
+            {% if user.is_authenticated %}
+                {% if user.id == post.author.id %}
+                     -<small><a href="{% url 'edit_post' post.pk %}">[Edit]</a></small> - 
+                    <small><a href="{% url 'delete_post' post.pk %}">[Delete]</a></small>
+                {% endif %}
+            {% endif %}
+            <br/>
+        {{ post.snippet }}<br/><br/></li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>   
+{% endblock %}
