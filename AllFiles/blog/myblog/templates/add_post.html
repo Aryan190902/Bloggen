@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Add Post{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p><h1>Add Post here</h1></p>
+    <div class="mb-3">
+        <form method="POST", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Post</button>
+        </form>
+        <br/>
+        You can add a new category by:
+        <br/>
+        <a href="{% url 'add_category' %}" class="btn btn-primary">Add Category</a>
+    </div>
+    <script>
+        let name = "{{ user.username }}";
+        document.getElementById("Blogger").value = name;
+    </script>
+    {% else %}
+    Please Login to continue... <br/>
+    <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</body>
+</html>   
+{% endblock %}
