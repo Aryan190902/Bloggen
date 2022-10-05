@@ -1,1 +1,1 @@
-web: gunicorn blog/blog/wsgi:app
+web: gunicorn blog/blog/wsgi --log-file -
